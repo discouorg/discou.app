@@ -22,12 +22,13 @@ import HomeScreen from './src/screens/HomeScreen';
 import Login from './src/screens/Login';
 import News from './src/screens/News';
 import OrderConfirmed from './src/screens/OrderConfirmed';
+import Orders from './src/screens/Orders';
 import WelcomeScreen from './src/screens/WelcomeScreen';
 import Details from './src/screens/Details';
 import Register from './src/screens/Register';
 import ScannerScreen from './src/screens/Scanner';
 import Registerv2 from './src/screens/Registerv2';
-import Grid from './src/screens/Products';
+import Products from './src/screens/Products';
 
 import theme from './src/theme';
 import { Block, Icon, Text } from 'galio-framework';
@@ -123,8 +124,21 @@ const AppScreens = {
       drawerIcon: props => <MenuIcon name="location-arrow" family="font-awesome" focused={props.focused} />,
     },
   },
+  Orders: {
+    screen: Orders,
+    navigationOptions: {
+      drawerLabel: 'Заказы',
+      drawerIcon: props => <MenuIcon name="shopping-cart" family="font-awesome" focused={props.focused} />,
+    },
+  },
+  OrderConfirmed: {
+    screen: OrderConfirmed
+  },
   Details: {
     screen: Details,
+  },
+  Products: {
+    screen: Products,
   },
   Scanner: {
     screen: ScannerScreen,

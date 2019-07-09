@@ -20,41 +20,40 @@ const COLOR_WHITE = theme.COLORS.WHITE;
 const COLOR_GREY = theme.COLORS.MUTED; // '#D8DDE1';
 
 // mock data
+const cards = [
+  {
+    title: "АТБ",
+    subtitle: "2 дня назад",
+    icon: 'map-marker',
+    iconFamily: 'font-awesome',
+  },
 
+  {
+    title: "АТБ",
+    subtitle: "2 недели назад",
+    icon: 'map-marker',
+    iconFamily: 'font-awesome',
+  },
+  {
+    title: "АТБ",
+    subtitle: "1,5 месяца назад",
+    icon: 'map-marker',
+    iconFamily: 'font-awesome',
+  },
 
+  {
+    title: "Сильпо",
+    subtitle: "3 месяца назад",
+    icon: 'map-marker',
+    iconFamily: 'font-awesome',
+  },
+];
+const statsTitles = ['Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь'];
 
 class Dashboard extends React.Component {
-  cards = [
-    {
-      title: this.props.navigation.getParam('name'),
-      subtitle: this.props.navigation.getParam('discountfield'),
-      icon: 'map-marker',
-      iconFamily: 'font-awesome',
-    },
-
-    {
-      title: 'Aquisitions',
-      subtitle: '15 completed tasks',
-      icon: 'bag-17',
-      iconFamily: 'Galio',
-    },
-    {
-      title: 'Cards',
-      subtitle: '15 completed tasks',
-      icon: 'credit-card',
-      iconFamily: 'Galio',
-    },
-
-    {
-      title: 'Settings',
-      subtitle: '15 completed tasks',
-      icon: 'settings-gear-65',
-      iconFamily: 'Galio',
-    },
-  ];
   renderHeader = () => (
     <NavBar
-      title={this.props.navigation.getParam('name')}
+      title="Ваши Заказы"
       onLeftPress={() => this.props.navigation.openDrawer()}
       leftIconColor={theme.COLORS.MUTED}
       right={(
@@ -63,7 +62,6 @@ class Dashboard extends React.Component {
           style={styles.settings}
           onPress={() => this.props.navigation.openDrawer()}
         >
-          <Icon size={BASE_SIZE} name="heart" family="font-awesome" color={theme.COLORS.MUTED} />
         </Button>
       )}
       style={Platform.OS === 'android' ? { marginTop: theme.SIZES.BASE } : null}
@@ -85,7 +83,35 @@ class Dashboard extends React.Component {
 
     return (
       <Block style={{ marginBottom: BASE_SIZE * 3 }}>
-
+        <AreaChart
+          yMin={0}
+          yMax={Math.max(...statsActive) + 1}
+          data={statsInactive}
+          curve={shape.curveNatural}
+          style={[StyleSheet.absoluteFill]}
+          contentInset={{
+            bottom: -BASE_SIZE * 0.15, right: -BASE_SIZE * 0.15, left: -BASE_SIZE * 0.15,
+          }}
+          svg={{ strokeWidth: 1, stroke: 'rgba(0,0,0,0.2)', strokeDasharray: 4 }}
+        >
+          <GradientStats />
+        </AreaChart>
+        <AreaChart
+          yMin={0}
+          yMax={Math.max(...statsActive) + 1}
+          data={statsActive}
+          curve={shape.curveNatural}
+          style={{ height: BASE_SIZE * 10 }}
+          contentInset={{
+            bottom: -BASE_SIZE * 0.21, right: -BASE_SIZE * 0.21, left: -BASE_SIZE * 0.21,
+          }}
+          svg={{ strokeWidth: BASE_SIZE * 0.1875, stroke: 'url(#gradient)' }}
+        >
+          <GradientStats />
+        </AreaChart>
+        <Block row space="evenly" style={{ marginTop: BASE_SIZE }}>
+          {statsTitles.map(title => <Text key={title} size={theme.SIZES.FONT * 0.85} muted>{title}</Text>)}
+        </Block>
       </Block>
     );
   }
@@ -113,17 +139,16 @@ class Dashboard extends React.Component {
           <Text size={BASE_SIZE * 1.125}>{props.title}</Text>
           <Text size={BASE_SIZE * 0.875} muted>{props.subtitle}</Text>
         </Block>
-        <Button style={styles.right}>
-          <Icon size={BASE_SIZE} name="minimal-right" family="Galio" color={COLOR_GREY} />
+        <Button onPress={() => { this.props.navigation.navigate("OrderConfirmed"); }} style={styles.right}>
+          <Icon size={BASE_SIZE} name="repeat" family="font-awesome" color={COLOR_GREY} />
         </Button>
       </Block>
     );
   }
 
-  renderCards = () => this.cards.map((card, index) => this.renderCard(card, index))
+  renderCards = () => cards.map((card, index) => this.renderCard(card, index))
 
   render() {
-
     return (
       <Block safe flex>
         {/* header */}

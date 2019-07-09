@@ -41,7 +41,7 @@ export default class Components extends React.Component {
           style={styles.card}
           title={item.name}
           caption={item.discountfield}
-          location={item.location}
+          location={item.locationfield}
           avatar={item.logo}
           imageStyle={styles.cardImageRadius}
           imageBlockStyle={{ padding: theme.SIZES.BASE / 2 }}
@@ -78,26 +78,33 @@ export default class Components extends React.Component {
 
 
         <Block style={styles.container}>
-          <ScrollView style={{ position: "absolute", top: 0, left: 0, width }}>
-            {/* Typography examples using Text component */}
-            <Block style={{ padding: 7 }}>
+          <ScrollView style={{ flex: 1, position: "absolute", width }}>
+            <Block style={{ padding: 15 }}>
               <Text style={{ marginVertical: theme.SIZES.FONT / 4 }} h3>Рядом с вами</Text>
-              <Text style={{ marginVertical: theme.SIZES.FONT / 4 }} p muted>
+              <Text style={{ marginVertical: theme.SIZES.FONT / 16 }} p muted>
                 Функции геолокации выключены, так как на данный момент нет данных о точках.
                 </Text>
             </Block>
-            <Block flex>
-              <Block center flex space="between" style={styles.cards}>
-                <Carousel
-                  ref={(c) => { this._carousel = c; }}
-                  data={this.state.entries}
-                  renderItem={this._renderItem}
-                  style={{ position: "absolute", left: 15, paddingLeft: 25 }}
-                  layout="stack"
-                  sliderWidth={width + 15}
-                  itemWidth={width + 10}
-                />
-              </Block>
+            <Block style={styles.cards}>
+              <Carousel
+                ref={(c) => { this._carousel = c; }}
+                data={this.state.entries}
+                renderItem={this._renderItem}
+                style={{ position: "absolute", left: 15, paddingLeft: 25 }}
+                layout="stack"
+                sliderWidth={width + 15}
+                itemWidth={width + 10}
+              />
+              <Text style={{ marginVertical: theme.SIZES.FONT / 4 }} h3>Избранные</Text>
+              <Carousel
+                ref={(c) => { this._carousel = c; }}
+                data={this.state.entries}
+                renderItem={this._renderItem}
+                style={{ position: "absolute", left: 15, paddingLeft: 25 }}
+                layout="stack"
+                sliderWidth={width + 15}
+                itemWidth={width + 10}
+              />
             </Block>
           </ScrollView>
         </Block>
@@ -108,7 +115,7 @@ export default class Components extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 7,
+    padding: 15,
     justifyContent: 'flex-start',
     backgroundColor: theme.COLORS.WHITE,
   },
@@ -126,6 +133,10 @@ const styles = StyleSheet.create({
     backgroundColor: theme.COLORS.WHITE,
     width: width - theme.SIZES.BASE * 2,
     marginVertical: theme.SIZES.BASE * 0.875,
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+
   },
   cardFooter: {
     justifyContent: 'flex-start',

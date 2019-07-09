@@ -39,14 +39,13 @@ class Article extends React.Component {
           resizeMode="cover"
           style={{
             width,
-            height: height * 0.55,
+            height: height * 0.35,
           }}
         />
 
         <Block center style={{ marginTop: -theme.SIZES.BASE * 2 }}>
           <Block flex style={styles.header}>
             <Block center>
-              <Text size={theme.SIZES.BASE * 1.875}>{props.navigation.getParam('name')}</Text>
               <MapView
                 initialRegion={{
                   latitude: 50.444932,
@@ -56,20 +55,24 @@ class Article extends React.Component {
                 }}
                 style={{
                   width,
-                  height: height / 7,
+                  height: height / 3.456789,
                 }}
 
               />
               <Card
                 borderless
                 style={styles.stats}
-                title={props.navigation.getParam('discountfield')}
+                title={props.navigation.getParam('name') + " / " + props.navigation.getParam('discountfield')}
                 avatar={props.navigation.getParam('logo')}
                 location={props.navigation.getParam('locationfield')}
               />
             </Block>
 
-            <Text style={styles.text} h2 color={theme.COLORS.ERROR}>Собрать пакет</Text>
+            <Button left style={styles.text} onPress={() => props.navigation.navigate("Products", {
+              name: props.navigation.getParam('name'), logo: props.navigation.getParam('logo'), image: props.navigation.getParam('image'), locationfield: props.navigation.getParam('locationfield'), discountfield: props.navigation.getParam('discountfield')
+            })} h2 color={theme.COLORS.PRIMARY}>Продукция</Button>
+            <Text />
+            <Button left style={styles.text} onPress={() => props.navigation.navigate("Orders")} h2 color={theme.COLORS.BLACK}>Заказы</Button>
           </Block>
         </Block>
       </Block>
@@ -80,10 +83,10 @@ class Article extends React.Component {
 const styles = StyleSheet.create({
   header: {
     backgroundColor: theme.COLORS.WHITE,
-    borderTopLeftRadius: theme.SIZES.BASE * 1.5,
-    borderTopRightRadius: theme.SIZES.BASE * 1.5,
-    paddingVertical: theme.SIZES.BASE * 2,
-    paddingHorizontal: theme.SIZES.BASE * 1.5,
+    borderTopLeftRadius: theme.SIZES.BASE,
+    borderTopRightRadius: theme.SIZES.BASE,
+    paddingVertical: theme.SIZES.BASE,
+    paddingHorizontal: theme.SIZES.BASE,
     width,
   },
   navbar: {
