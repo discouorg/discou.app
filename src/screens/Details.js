@@ -20,47 +20,62 @@ const { width, height } = Dimensions.get('screen');
 
 const bgImage = 'https://images.unsplash.com/photo-1516651029879-bcd191e7d33b?fit=crop&w=900&q=80';
 
-const Article = props => (
-  <Block>
-    <StatusBar barStyle="light-content" />
-    <Block style={styles.navbar}>
-      <NavBar transparent leftIconColor={theme.COLORS.WHITE} onLeftPress={() => props.navigation.openDrawer()} />
-    </Block>
+class Article extends React.Component {
+  static navigationOptions = {
+    drawerLabel: () => null
+  }
 
-    <Image
-      source={{ uri: props.navigation.getParam('image') }}
-      resizeMode="cover"
-      style={{
-        width,
-        height: height * 0.55,
-      }}
-    />
-
-    <Block center style={{ marginTop: -theme.SIZES.BASE * 2 }}>
-      <Block flex style={styles.header}>
-        <Block>
-          <Text size={theme.SIZES.BASE * 1.875}>{props.navigation.getParam('name')}</Text>
-          <Card
-            borderless
-            style={styles.stats}
-            title={props.navigation.getParam('discountfield')}
-            avatar={props.navigation.getParam('logo')}
-            location={props.navigation.getParam('locationfield')}
-          />
+  render() {
+    const props = this.props;
+    return (
+      <Block>
+        <StatusBar barStyle="light-content" />
+        <Block style={styles.navbar}>
+          <NavBar transparent leftIconColor={theme.COLORS.WHITE} onLeftPress={() => props.navigation.openDrawer()} />
         </Block>
-        <MapView
-          initialRegion={{
-            latitude: 37.78825,
-            longitude: -122.4324,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
+
+        <Image
+          source={{ uri: props.navigation.getParam('image') }}
+          resizeMode="cover"
+          style={{
+            width,
+            height: height * 0.55,
           }}
         />
-        <Text style={styles.text} color={theme.COLORS.ERROR}>Собрать пакет</Text>
+
+        <Block center style={{ marginTop: -theme.SIZES.BASE * 2 }}>
+          <Block flex style={styles.header}>
+            <Block center>
+              <Text size={theme.SIZES.BASE * 1.875}>{props.navigation.getParam('name')}</Text>
+              <MapView
+                initialRegion={{
+                  latitude: 50.444932,
+                  longitude: 30.421050,
+                  latitudeDelta: 0.0122,
+                  longitudeDelta: 0.0421,
+                }}
+                style={{
+                  width,
+                  height: height / 7,
+                }}
+
+              />
+              <Card
+                borderless
+                style={styles.stats}
+                title={props.navigation.getParam('discountfield')}
+                avatar={props.navigation.getParam('logo')}
+                location={props.navigation.getParam('locationfield')}
+              />
+            </Block>
+
+            <Text style={styles.text} h2 color={theme.COLORS.ERROR}>Собрать пакет</Text>
+          </Block>
+        </Block>
       </Block>
-    </Block>
-  </Block>
-);
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   header: {
@@ -86,7 +101,7 @@ const styles = StyleSheet.create({
   },
   title: {
     justifyContent: 'center',
-    paddingLeft: theme.SIZES.BASE / 2,
+    paddingLeft: theme.SIZES.BASE / 4,
   },
   avatar: {
     width: theme.SIZES.BASE * 2.5,

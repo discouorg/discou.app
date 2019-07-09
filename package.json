@@ -39,6 +39,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.9.0",
     "@fortawesome/react-native-fontawesome": "^0.1.0",
     "expo": "^33.0.0",
+    "expo-barcode-scanner": "^5.0.1",
     "expo-constants": "^5.0.1",
     "expo-linear-gradient": "^5.0.1",
     "parse": "^2.4.0",

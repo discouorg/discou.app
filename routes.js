@@ -25,6 +25,7 @@ import OrderConfirmed from './src/screens/OrderConfirmed';
 import WelcomeScreen from './src/screens/WelcomeScreen';
 import Details from './src/screens/Details';
 import Register from './src/screens/Register';
+import ScannerScreen from './src/screens/Scanner';
 import Registerv2 from './src/screens/Registerv2';
 import Grid from './src/screens/Products';
 
@@ -41,19 +42,6 @@ class GalioDrawer extends React.Component {
     user: { email: "some.one@somemail.com" }
   }
   async componentDidMount() {
-    try {
-      const user = await Parse.User.currentAsync();
-      console.log(user);
-      if (user !== undefined && user !== null) {
-        console.log(user);
-        this.setState({ user });
-      }
-    } catch (error) {
-      //Alert.alert("Ошибка: " + error.code + " " + error.message);
-    }
-  }
-
-  async componentDidUpdate() {
     try {
       const user = await Parse.User.currentAsync();
       console.log(user);
@@ -137,6 +125,13 @@ const AppScreens = {
   },
   Details: {
     screen: Details,
+  },
+  Scanner: {
+    screen: ScannerScreen,
+    navigationOptions: {
+      drawerLabel: 'Сканнер карт',
+      drawerIcon: props => <MenuIcon name="credit-card" family="font-awesome" focused={props.focused} />,
+    },
   }
 };
 
@@ -145,14 +140,14 @@ const AuthScreens = {
     screen: Login,
     navigationOptions: {
       drawerLabel: 'Войти',
-      drawerIcon: props => <MenuIcon name="flag" family="font-awesome" focused={props.focused} />,
+      drawerIcon: props => <MenuIcon name="sign-out" family="font-awesome" focused={props.focused} />,
     },
   },
   Register: {
     screen: Register,
     navigationOptions: {
       drawerLabel: 'Зарегистрироваться',
-      drawerIcon: props => <MenuIcon name="flag" family="font-awesome" focused={props.focused} />,
+      drawerIcon: props => <MenuIcon name="sign-in" family="font-awesome" focused={props.focused} />,
     },
   }
 };

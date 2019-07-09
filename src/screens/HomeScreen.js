@@ -76,11 +76,12 @@ export default class Components extends React.Component {
           style={Platform.OS === 'android' ? { marginTop: theme.SIZES.BASE } : null}
         />
 
-        <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
-          <Block style={styles.container}>
+
+        <Block style={styles.container}>
+          <ScrollView style={{ position: "absolute", top: 0, left: 0, width }}>
             {/* Typography examples using Text component */}
-            <Block style={{ padding: theme.SIZES.BASE }}>
-              <Text style={{ marginVertical: theme.SIZES.FONT / 4 }} h2>Рядом с вами</Text>
+            <Block style={{ padding: 7 }}>
+              <Text style={{ marginVertical: theme.SIZES.FONT / 4 }} h3>Рядом с вами</Text>
               <Text style={{ marginVertical: theme.SIZES.FONT / 4 }} p muted>
                 Функции геолокации выключены, так как на данный момент нет данных о точках.
                 </Text>
@@ -91,22 +92,23 @@ export default class Components extends React.Component {
                   ref={(c) => { this._carousel = c; }}
                   data={this.state.entries}
                   renderItem={this._renderItem}
-                  layout='stack'
+                  style={{ position: "absolute", left: 15, paddingLeft: 25 }}
+                  layout="stack"
                   sliderWidth={width + 15}
                   itemWidth={width + 10}
                 />
               </Block>
             </Block>
-          </Block>
-        </ScrollView>
-      </Block>
+          </ScrollView>
+        </Block>
+      </Block >
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    padding: 14,
+    padding: 7,
     justifyContent: 'flex-start',
     backgroundColor: theme.COLORS.WHITE,
   },
