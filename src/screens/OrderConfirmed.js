@@ -18,12 +18,15 @@ const { height, width } = Dimensions.get('window');
 const orderConfirmedImage = require('../../assets/order_confirmed.png');
 
 class OrderConfirmed extends React.Component {
+  static navigationOptions = {
+    drawerLabel: () => null
+  }
   render() {
     const { navigation } = this.props;
     return (
       <Block safe flex>
         <NavBar
-          title="Confirmed Order"
+          title="Заказ отправлен в обработку"
           onLeftPress={() => navigation.openDrawer()}
           style={Platform.OS === 'android' ? { marginTop: theme.SIZES.BASE } : null}
         />
@@ -35,7 +38,7 @@ class OrderConfirmed extends React.Component {
                 style={{ marginBottom: theme.SIZES.BASE * 2 }}
               />
               <Text h4 color={theme.COLORS.BLACK}>
-                Well done!
+                Спасибо за то что воспользовались сервисом Сбор Пакета!
               </Text>
             </Block>
             <Text
@@ -49,15 +52,12 @@ class OrderConfirmed extends React.Component {
                 #45C23B&nbsp;
               </Text>
               <Text >
-                is your order number
+                Ваш номер заказа
               </Text>
             </Text>
-            <Text color={theme.COLORS.INFO}>
-              Track your order
-            </Text>
           </Block>
-          <Button size="large" color="info" round onPress={() => {}}>
-            Continue Shopping
+          <Button size="large" color="info" round onPress={() => { this.props.navigation.goBack() }}>
+            Вернуться
           </Button>
         </Block>
       </Block>

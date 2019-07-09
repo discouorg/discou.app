@@ -19,6 +19,7 @@ export default class BarcodeScanner extends React.Component {
     state = {
         hasCameraPermission: null,
         scanned: false,
+        startScanner: false
     };
 
     async componentDidMount() {
@@ -31,7 +32,7 @@ export default class BarcodeScanner extends React.Component {
     };
 
     render() {
-        const { hasCameraPermission, scanned } = this.state;
+        const { hasCameraPermission, scanned, startScanner } = this.state;
 
         if (hasCameraPermission === null) {
             return <Text>Requesting for camera permission</Text>;
@@ -45,38 +46,32 @@ export default class BarcodeScanner extends React.Component {
                 style={{
                     flex: 1,
                     flexDirection: 'column',
-                    justifyContent: 'flex-end',
+                    justifyContent: 'center',
+                    alignItems: 'center',
                 }}>
-                <NavBar
-                    title="Сканнер карт"
-                    onLeftPress={() => this.props.navigation.openDrawer()}
-                    leftIconColor={theme.COLORS.MUTED}
-                    style={{ position: "absolute", zindex: 9999 }}
-                    right={(
-                        <Button
-                            color="transparent"
-                            style={styles.settings}
-                            onPress={() => this.props.navigation.openDrawer()}
-                        >
-                            <Icon size={BASE_SIZE} name="heart" family="font-awesome" color={theme.COLORS.MUTED} />
-                        </Button>
-                    )}
-                    style={Platform.OS === 'android' ? { marginTop: theme.SIZES.BASE } : null}
-                />
-                <BarCodeScanner
-                    onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned}
-                    style={StyleSheet.absoluteFillObject}
-                />
+                {startScanner && (
+                    <BarCodeScanner
+                        onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned}
+                        style={StyleSheet.absoluteFillObject}
+                    />)}
 
                 {scanned && (
                     <Button onPress={() => this.setState({ scanned: false })}>Отсканировать еще?</Button>
+                )}
+                {!startScanner && (
+                    <View>
+                        <Button onPress={() => this.setState({ startScanner: true })}>Начать сканирование</Button>
+                        <Text />
+                        <Button onPress={() => this.props.navigation.openDrawer()}>Вернуться</Button>
+                    </View>
                 )}
             </View>
         );
     }
 
     handleBarCodeScanned = ({ type, data }) => {
-        this.setState({ scanned: true });
+        this.setState({ scanned: false });
+        this.setState({ startScanner: false })
         const Card = Parse.Object.extend("Card");
         const card = new Card();
         card.set("type", type);
@@ -84,12 +79,15 @@ export default class BarcodeScanner extends React.Component {
         card.save()
             .then((card) => {
                 // Execute any logic that should take place after the object is saved.
-                Alert.alert(`Спасибо за помощь, на данный момент функция в разработке. \n\n\n Тип данной карты: ${type} \n Данные карты: ${data}`);
-                // alert('New object created with objectId: ' + card.id);
+                this.setState({ scanned: true });
                 this.props.navigation.goBack();
+                Alert.alert(`Спасибо за помощь, на данный момент функция находиться в разработке. \n\n\n Тип данной карты: ${type} \n Данные карты: ${data}`);
+                // alert('New object created with objectId: ' + card.id);
+                
             }, (error) => {
                 // Execute any logic that should take place if the save fails.
                 // error is a Parse.Error with an error code and message.
+                this.setState({ scanned: true });
                 this.props.navigation.goBack();
             });
     };

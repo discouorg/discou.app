@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Dimensions, StyleSheet, Platform,
+  Dimensions, StyleSheet, Platform, Alert
 } from 'react-native';
 // galio components
 import {
@@ -20,75 +20,140 @@ const chunk = (arr, size) => {
 
 const grids = [
   {
-    title: 'Facebook',
-    icon: 'social-facebook',
+    title: 'Sandora',
+    icon: 'ssdkjn',
+    description: "50мл",
+    category: "Сок / Яблучный",
     family: 'Foundation',
+    discount: "-2%"
   },
   {
-    title: 'Github',
-    icon: 'social-github',
+    title: 'Esmeralda',
+    icon: 'ssdkjn',
+    description: "300г",
+    category: "Печенье",
     family: 'Foundation',
+    discount: "-7%"
   },
   {
-    title: 'Instagram',
-    icon: 'social-instagram',
+    title: 'БЛАБЛА',
+    icon: 'ssdkjn',
+    description: "300г",
+    category: "Печенье",
     family: 'Foundation',
+    discount: "-" + ((Math.random() * 100000000000000000).toString().slice(-1)) + "%"
   },
   {
-    title: 'Facebook',
-    icon: 'social-facebook',
-    family: 'SimpleLineIcons',
-  },
-  {
-    title: 'Github',
-    icon: 'social-github',
-    family: 'SimpleLineIcons',
-  },
-  {
-    title: 'Instagram',
-    icon: 'social-instagram',
-    family: 'SimpleLineIcons',
-  },
-  {
-    title: 'Android',
-    icon: 'social-android',
+    title: 'БЛАБЛА',
+    icon: 'ssdkjn',
+    description: "300г",
+    category: "Печенье",
     family: 'Foundation',
+    discount: "-" + ((Math.random() * 100000000000000000).toString().slice(-1)) + "%"
   },
   {
-    title: 'Apple',
-    icon: 'social-apple',
+    title: 'БЛАБЛА',
+    icon: 'ssdkjn',
+    description: "300г",
+    category: "Печенье",
     family: 'Foundation',
+    discount: "-" + ((Math.random() * 100000000000000000).toString().slice(-1)) + "%"
   },
   {
-    title: 'Digg',
-    icon: 'social-digg',
+    title: 'БЛАБЛА',
+    icon: 'ssdkjn',
+    description: "300г",
+    category: "Печенье",
     family: 'Foundation',
+    discount: "-" + ((Math.random() * 100000000000000000).toString().slice(-1)) + "%"
   },
   {
-    title: '500px',
-    icon: '500px',
-    family: 'Entypo',
+    title: 'БЛАБЛА',
+    icon: 'ssdkjn',
+    description: "300г",
+    category: "Печенье",
+    family: 'Foundation',
+    discount: "-" + ((Math.random() * 100000000000000000).toString().slice(-1)) + "%"
   },
   {
-    title: 'App Store',
-    icon: 'app-store',
-    family: 'Entypo',
+    title: 'БЛАБЛА',
+    icon: 'ssdkjn',
+    description: "300г",
+    category: "Печенье",
+    family: 'Foundation',
+    discount: "-" + ((Math.random() * 100000000000000000).toString().slice(-1)) + "%"
   },
   {
-    title: 'Baidu',
-    icon: 'baidu',
-    family: 'Entypo',
+    title: 'БЛАБЛА',
+    icon: 'ssdkjn',
+    description: "300г",
+    category: "Печенье",
+    family: 'Foundation',
+    discount: "-" + ((Math.random() * 100000000000000000).toString().slice(-1)) + "%"
   },
+  {
+    title: 'БЛАБЛА',
+    icon: 'ssdkjn',
+    description: "300г",
+    category: "Печенье",
+    family: 'Foundation',
+    discount: "-" + ((Math.random() * 100000000000000000).toString().slice(-1)) + "%"
+  },
+  {
+    title: 'БЛАБЛА',
+    icon: 'ssdkjn',
+    description: "300г",
+    category: "Печенье",
+    family: 'Foundation',
+    discount: "-" + ((Math.random() * 100000000000000000).toString().slice(-1)) + "%"
+  },
+  {
+    title: 'БЛАБЛА',
+    icon: 'ssdkjn',
+    description: "300г",
+    category: "Печенье",
+    family: 'Foundation',
+    discount: "-" + ((Math.random() * 100000000000000000).toString().slice(-1)) + "%"
+  },
+  {
+    title: 'БЛАБЛА',
+    icon: 'ssdkjn',
+    description: "300г",
+    category: "Печенье",
+    family: 'Foundation',
+    discount: "-" + ((Math.random() * 100000000000000000).toString().slice(-1)) + "%"
+  },
+  {
+    title: 'БЛАБЛА',
+    icon: 'ssdkjn',
+    description: "300г",
+    category: "Печенье",
+    family: 'Foundation',
+    discount: "-" + ((Math.random() * 100000000000000000).toString().slice(-1)) + "%"
+  },
+  {
+    title: 'БЛАБЛА',
+    icon: 'ssdkjn',
+    description: "300г",
+    category: "Печенье",
+    family: 'Foundation',
+    discount: "-" + ((Math.random() * 100000000000000000).toString().slice(-1)) + "%"
+  },
+
 ];
 
 class Grid extends React.Component {
+  static navigationOptions = {
+    drawerLabel: () => null
+  }
   render() {
     const { navigation } = this.props;
+
     return (
       <Block safe flex>
         <NavBar
           fix
-          title="Grid"
+          title={"Продукция: " + navigation.getParam('name')}
           onLeftPress={() => navigation.openDrawer()}
           style={Platform.OS === 'android' ? { marginTop: theme.SIZES.BASE } : null}
         />
@@ -99,11 +164,24 @@ class Grid extends React.Component {
                 {
                   row.map(grid => (
                     <Block shadow middle style={styles.block} key={`grid-${grid.title}}`}>
-                      <Button color="transparent" style={styles.button} onPress={() => navigation.openDrawer()}>
+                      <Button color="transparent" style={styles.button} onPress={() => Alert.alert("Выбор продуктов временно не доступен")}>
                         <Block flex middle>
                           <Icon name={grid.icon} family={grid.family} size={BASE_SIZE * 1.875} />
-                          <Text size={BASE_SIZE * 0.875}>
+                          <Text size={BASE_SIZE * 0.875 / 1.1}>
                             {grid.title}
+                            {' '}
+
+                          </Text>
+                          <Text size={BASE_SIZE * 0.875 / 1.3}>
+                            {grid.description}
+                            {' '}
+                          </Text>
+                          <Text size={BASE_SIZE * 0.875 / 1.33}>
+                            {grid.category}
+                            {' '}
+                          </Text>
+                          <Text size={BASE_SIZE * 0.875 / 1.5}>
+                            {grid.discount}
                             {' '}
                           </Text>
                         </Block>
