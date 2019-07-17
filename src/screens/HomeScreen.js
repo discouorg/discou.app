@@ -15,7 +15,7 @@ import { AsyncStorage } from 'react-native';
 Parse.setAsyncStorage(AsyncStorage);
 Parse.initialize("Discou");
 Parse.serverURL = 'https://d-srv-main.herokuapp.com/parse'
-const { width } = Dimensions.get('screen');
+const { width, height } = Dimensions.get('screen');
 
 export default class Components extends React.Component {
   constructor() {
@@ -78,10 +78,10 @@ export default class Components extends React.Component {
 
 
         <Block style={styles.container}>
-          <ScrollView style={{ flex: 1, position: "absolute", width }}>
+          <ScrollView style={{ flex: 0.8, position: "absolute", width, height: 2000, marginBottom: 30 }}>
             <Block style={{ padding: 15 }}>
-              <Text style={{ marginVertical: theme.SIZES.FONT / 4 }} h3>Рядом с вами</Text>
-              <Text style={{ marginVertical: theme.SIZES.FONT / 16 }} p muted>
+              <Text style={{ marginVertical: theme.SIZES.FONT / 4 / 2 }} h3>Рядом с вами</Text>
+              <Text style={{ marginVertical: theme.SIZES.FONT / 16 / 2 }} p muted>
                 Функции геолокации выключены, так как на данный момент нет данных о точках.
                 </Text>
             </Block>
