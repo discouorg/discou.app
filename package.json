@@ -33,7 +33,7 @@
     "eject": "expo eject",
     "devtools": "react-devtools",
     "lint": "eslint src/**.js",
-    "test": "jest --coverage=false"
+    "test": "jest --coverage=false --ci --debug"
   },
   "husky": {
     "hooks": {
