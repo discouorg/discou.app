@@ -11,29 +11,18 @@ publish: &publish
         command: npm install
 
     - run:
-        name: Login into Expo
-        command: sudo npm i -g expo && npx expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
-
-    - run:
-        name: Publish to Expo
-        command: sudo npm i -g expo && npx expo publish --non-interactive --max-workers 1 --release-channel $EXPO_RELEASE_CHANNEL
+        name: Test with jest
+        command: npm run-script test
 
 jobs:
-  publish_to_expo_dev:
-    environment:
-      EXPO_RELEASE_CHANNEL: dev
-    <<: *publish
-
-  publish_to_expo_prod:
-    environment:
-      EXPO_RELEASE_CHANNEL: default
+  test_jest:
     <<: *publish
 
 workflows:
   version: 2
   my_app:
     jobs:
-      - publish_to_expo_prod:
+      - test_jest:
           filters:
             branches:
               only: master

@@ -32,12 +32,26 @@
     "ios": "expo start --ios",
     "eject": "expo eject",
     "devtools": "react-devtools",
-    "lint": "eslint src/**.js"
+    "lint": "eslint src/**.js",
+    "test": "jest --coverage=false --changedSince=origin/master"
   },
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
+  },
+  "jest": {
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+      "node_modules/(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|sentry-expo|native-base)"
+    ],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/coverage/**",
+      "!**/node_modules/**",
+      "!**/babel.config.js"
+    ]
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.19",
@@ -68,11 +82,14 @@
     "eslint-plugin-react-native": "^3.7.0",
     "galio-framework": "^0.5.3",
     "husky": "^3.0.0",
+    "jest": "^24.8.0",
+    "jest-expo": "^33.0.2",
     "prettier": "^1.14.2",
     "prop-types": "^15.6.2",
     "react-devtools": "^3.3.2",
     "react-native-svg-charts": "^5.2.0",
     "react-navigation": "^3.11.0",
+    "react-test-renderer": "^16.8.6",
     "whatwg-fetch": "^2.0.4"
   },
   "peerDependencies": {
