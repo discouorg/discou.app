@@ -1,6 +1,6 @@
 # [galio](https://www.galio.io) [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)](https://twitter.com/home?status=Galio,%20a%20free%20and%20beautiful%20UI%20framework%20https%3A//galio.io/%20%23reactnative%20%23react%20%23design%20%23developers%20%23freebie%20via%20%40CreativeTim)
 
-[![GitHub issues](https://img.shields.io/github/issues/galio-org/galio.svg?style=popout)](https://github.com/galio-org/galio)
+[![GitHub issues](https://img.shields.io/github/issues/galio-org/galio.svg?style=popout)](https://github.com/galio-org/galio) [![Greenkeeper badge](https://badges.greenkeeper.io/discouorg/discou.app.svg)](https://greenkeeper.io/)
 
 Galio is a 100% free and open source project, licensed under MIT. It will always remain free to use, powered by a massive world-wide community. 
 Carefully crafted. Ready-made components, typography, and a gorgeous base theme that adaps to each project. You'll be building in style.
